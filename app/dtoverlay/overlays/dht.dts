@@ -8,7 +8,7 @@
 
   dht11@18 {
     compatible = "dht11";
-    gpios = <&gpio 118 0>;
+    gpios = <&gpio 18 0>;
   };
 
 };

@@ -11,7 +11,7 @@ For this project you'll need the exact same hardware and setup as [from the prev
 In addition you'll need a **second** board like a Raspberry Pi 3 with an optional sensor connected to it:
 *   [AM2302 (or DHTxx) Humidity & Temperature Sensor](https://www.adafruit.com/product/393)
 
-Don't worry if you don't have the AM2302 sensor, you can  alternatively run a mock sensor collection script to collect fake data and still run and learn from this project.
+Don't worry if you don't have the AM2302/DHT sensor, you can  alternatively run a mock sensor collection script to collect fake data and still run and learn from this project.
 
 Be sure to [follow part 2](https://github.com/tdicola/balena_logging_sensors_pt_2/blob/master/index.md) to create and deploy a sensor logging application to Balena Cloud before continuing.
 
@@ -41,7 +41,7 @@ git init
 git remote balena <your account>@git.balena-cloud.com:<your account>/balena-datalogging-pt-3.git
 ````
 
-If you're using a real AM2302 sensor with the sensor-pi3 device you'll want to slightly modify the docker-compose.yml file to enable the real sensor measurements.  Scroll down to the dht-sensor service in the file:
+If you're using a real AM2302/DHT sensor with the sensor-pi3 device you'll want to slightly modify the docker-compose.yml file to enable the real sensor measurements.  Scroll down to the dht-sensor service in the file:
 ````
 dht-sensor:
   build: telegraf
@@ -65,7 +65,7 @@ dht-sensor:
   restart: on-failure
 ````
 
-If you keep the mock_dht_sensor.sh script then fixed, fake humidity and temperature data will be sent to the collector.
+If you keep the mock_dht_sensor.sh script in the compose file you'll get fixed, fake humidity and temperature for testing sent to the collector.
 
 Now commit and push the code to Balena's remote repository:
 ````

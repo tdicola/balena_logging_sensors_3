@@ -204,3 +204,10 @@ In addition the telegraf.conf configuration has an important change to now read 
 That's all there is to this multi-device sensor datalogging dashboard project!
 
 # Summary
+
+Let's summarize what we've learned through all three parts of this series:
+1.   The first part was a deep dive into using sensors with modern embedded Linux and systems like Industrail I/O (IIO).
+2.   The second part built on the first one to show how a mult-container Balena application can easily build a full-featured sensor dashboard with the TIG (Telegraf-InfluxDB-Grafana) stack of services.
+3.   The third part here built on the previous two parts to extend the application to support multiple devices running independent sensor datalogging containers.
+
+This project can serve as a blueprint for building your own simple or complex sensor datalogging project.  You can start with just a single board and sensor, and scale up to hundreds of devices all sending data to a beautiful, centralized dashboard!

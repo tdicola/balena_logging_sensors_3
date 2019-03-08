@@ -1,6 +1,6 @@
 # Logging Data With Balena Pt. 3: Multi-Device Sensor Dashboard
 
-This is the third and final part in a series that dives into logging sensor data with embedded Linux, containers, and Balena's platform.  The [first part](https://github.com/tdicola/balena_logging_sensors_pt_1/blob/master/index.md) was a deep dive into how sensors can be read by embedded Linux, and the [second part](https://github.com/tdicola/balena_logging_sensors_pt_2/blob/master/index.md) explored how to collect and graph sensor data with a TIG stack of services.  This third part builds on the first and second parts to explore building a multi-device Balena application.  You'll learn how to write an application that logs data to a central TIG stack from multiple devices with their own sensors.  This project is an excellent blueprint for building your own complex multi-device applications with Balena's platform.
+This is the third and final part in a series that dives into logging sensor data with embedded Linux, containers, and Balena's platform.  The [first part](https://github.com/tdicola/balena_logging_sensors_pt_1/blob/master/index.md) was a deep dive into how sensors can be read by embedded Linux, and the [second part](https://github.com/tdicola/balena_logging_sensors_pt_2/blob/master/index.md) explored how to collect and graph sensor data with a TIG stack of services.  This third part builds on the first and second parts to explore building a multi-device Balena application that logs sensor data from different devices.
 
 # Hardware and Setup
 
@@ -8,7 +8,7 @@ For this project you'll need the exact same hardware and setup as [from the prev
 *   [Raspberry Pi 3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/).
 *   [Pimoroni Enviro-pHAT](https://shop.pimoroni.com/products/enviro-phat).
 
-In addition you'll need a **second** board like a Raspberry Pi 3 with an optional sensor connected to it:
+In addition you'll need a *second* Raspberry Pi 3 with an optional sensor connected to it:
 *   [AM2302 (or DHTxx) Humidity & Temperature Sensor](https://www.adafruit.com/product/393)
 
 Don't worry if you don't have the AM2302/DHT sensor, you can  alternatively run a mock sensor collection script to collect fake data and still run and learn from this project.
@@ -21,7 +21,7 @@ Let's add a second Raspberry Pi 3 to the application we created in part 2 of thi
 
 In Balena Cloud create a new application just as you saw in the [previous part of this series](https://github.com/tdicola/balena_logging_sensors_pt_2/blob/master/index.md).  Add two devices to this application:
 *   One Raspberry Pi 3 with the name **collector-pi3**.  This will be the device that runs the full TIG stack to collect and graph sensor data.  [Assign this Raspberry Pi a static IP address](https://www.balena.io/docs/reference/OS/network/2.x/#setting-a-static-ip) on your network so that it can easily be discovered and reached by other devices.  Connect the Enviro-pHAT to this Raspberry Pi too.
-*   A second Raspberry Pi 3 with the name **sensor-pi3**.  This will be a second device with its own unique sensor that it will read and send measurements to the collector device.  If you're using the AM2302/DHT sensor connect it to the Pi's GPIO pins [following its guide](https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/wiring) and using Pi GPIO #18 to read the sensor's data output line.
+*   A second Raspberry Pi 3 with the name **sensor-pi3**.  This will be a second device with its own unique sensor that it will read and send measurements to the collector device.  If you're using the AM2302/DHT sensor connect it to the Pi's GPIO pins [following its guide](https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/wiring) and using Pi **GPIO #18** to read the sensor's data output line.
 
 Make sure both your devices are booted, connected to the Internet, and visible in the application on Balena Cloud:
 ![](images/balena_multi_device.png?raw=true)
@@ -193,7 +193,9 @@ There's almost no change to the grafana service in this version of the applicati
 
 ## dtoverlay-enviro-phat and dtoverlay-dht Services
 
-These services are also unchanged with the exception of the entrypoint and RUN_ON_DEVICES addition.  Notice there are now two overlay services, one to run on each device and configure the appropriate device tree sensor overlays.  You can examine the DHT sensor overlay in the dtoverlay/overlays folder if you're curious to see how this overlay defines a DHT sensor connected to pin 18 of the Raspberry Pi GPIO.
+These services are also unchanged with the exception of the entrypoint and RUN_ON_DEVICES addition.
+
+Notice there are now two overlay services, one to run on each device and configure the appropriate device tree sensor overlays.  You can examine the DHT sensor overlay in the dtoverlay/overlays folder if you're curious to see how this overlay defines a AM2302/DHT sensor connected to pin 18 of the Raspberry Pi GPIO.
 
 ## bmp280-sensor, ads1015-sensor, and dht-sensor Services
 

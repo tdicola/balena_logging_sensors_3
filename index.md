@@ -1,5 +1,7 @@
 # Logging Data With Balena Pt. 3: Multi-Device Sensor Dashboard
 
+[![Screencast](https://img.youtube.com/vi/JShbVyRo0HY/0.jpg)](https://www.youtube.com/watch?v=JShbVyRo0HY)
+
 This is the third and final part in a series that dives into logging sensor data with embedded Linux, containers, and Balena's platform.  The [first part](https://github.com/tdicola/balena_logging_sensors_pt_1/blob/master/index.md) was a deep dive into how sensors can be read by embedded Linux, and the [second part](https://github.com/tdicola/balena_logging_sensors_pt_2/blob/master/index.md) explored how to collect and graph sensor data with a TIG stack of services.  This third part builds on the first and second parts to explore building a multi-device Balena application that logs sensor data from different devices.
 
 # Hardware and Setup
